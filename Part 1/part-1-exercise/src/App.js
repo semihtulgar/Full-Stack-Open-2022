@@ -4,23 +4,25 @@ const Button = (props) => {
   return <button onClick={props.handleClick}>{props.text}</button>
 }
 
+const StatisticLine = ({ text, value }) => {
+  return <p>{text} {value}</p>
+}
+
+const calculateAverage = (good, neutral, bad) => {
+  return (good - bad) / (good + neutral + bad)
+}
+
+const calculatePositive = (good, neutral, bad) => {
+  return `${good / (good + neutral + bad)} %`;
+}
 const Statistics = ({ good, neutral, bad }) => {
-
-  const calculateAverage = (good, neutral, bad) => {
-    return (good - bad) / (good + neutral + bad)
-  }
-
-  const calculatePositive = (good, neutral, bad) => {
-    return good / (good + neutral + bad);
-  }
   return <div>
-    
-    <p>Good {good}</p>
-    <p>Neutral {neutral}</p>
-    <p>Bad {bad}</p>
-    <p>Total {isNaN(calculateAverage(good, neutral, bad)) ? "" : (good + neutral + bad)}</p>
-    <p>Average {isNaN(calculateAverage(good, neutral, bad)) ? "" : calculateAverage(good, neutral, bad)}</p>
-    <p>Positive {isNaN(calculatePositive(good, neutral, bad)) ? "" : calculatePositive(good, neutral, bad)} %</p>
+    <StatisticLine text="Good" value={good} />
+    <StatisticLine text="Neutral" value={neutral} />
+    <StatisticLine text="Bad" value={bad} />
+    <StatisticLine text="Total" value={good + neutral + bad} />
+    <StatisticLine text="Average" value={calculateAverage(good, neutral, bad)} />
+    <StatisticLine text="Positive" value={calculatePositive(good, neutral, bad)} />
   </div>
 }
 
