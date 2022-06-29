@@ -22,6 +22,14 @@ const App = () => {
     }
   }
 
+  const calculateAverage = (good, neutral, bad) => {
+    return (good - bad) / (good + neutral + bad)
+  }
+
+  const calculatePositive = (good, neutral, bad) => {
+    return good / (good + neutral + bad);
+  }
+
   return (
     <div>
       <h1>Give Feedback</h1>
@@ -34,6 +42,9 @@ const App = () => {
       <p>Good {good}</p>
       <p>Neutral {neutral}</p>
       <p>Bad {bad}</p>
+      <p>Total {good + neutral + bad}</p>
+      <p>Average {isNaN(calculateAverage(good, neutral, bad)) ? 0 : calculateAverage(good, neutral, bad)}</p>
+      <p>Positive {isNaN(calculatePositive(good, neutral, bad)) ? 0 : calculatePositive(good, neutral, bad)} %</p>
     </div>
   )
 }
