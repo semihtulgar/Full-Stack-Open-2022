@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 
 const App = () => {
   const anecdotes = [
@@ -15,7 +15,6 @@ const App = () => {
 
   const handleClick = () => {
     let index = Math.floor(Math.random() * anecdotes.length)
-    console.log(index)
     setSelected(index)
   }
    
@@ -25,15 +24,24 @@ const App = () => {
     setVotes(newArray)
   }
 
+  const findMostVoted = () => {
+    const index = votes.indexOf(Math.max(...votes));
+    return index;
+  }
+
   const [selected, setSelected] = useState(0)
 
   return (
     <div>
+      <h1>Anectode of the Day</h1>
       {anecdotes[selected]}
       <p>has {votes[selected]} votes</p>
       <br />
       <button onClick={voteAnectode}>vote</button>
       <button onClick={handleClick}>Next Anecdote</button>
+      <h1>Anectode with most votes</h1>
+      <p>{anecdotes[findMostVoted()]}</p>
+      <p>has {votes[findMostVoted()]} votes</p>
     </div>
   )
 }
