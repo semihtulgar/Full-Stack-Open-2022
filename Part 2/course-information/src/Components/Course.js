@@ -3,7 +3,6 @@ import Header from "./CoursePartials/Header";
 import Content from "./CoursePartials/Content";
 
 function Course({ course }) {
-    console.log(course)
     return (
         <>
             <Header name={course.name} />
