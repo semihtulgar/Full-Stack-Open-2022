@@ -2,9 +2,15 @@ import React from "react";
 import Part from "./CourseDetails/Part";
 
 function Content({ parts }) {
-  console.log(parts);
-  let total = 0;
-  let totalOfExercises = parts.forEach(part => total += part.exercises);
+  // console.log(parts);
+  const amountOfExercises = [];
+  parts.forEach((part) => {
+    amountOfExercises.push(part.exercises);
+  });
+  let total = amountOfExercises.reduce((previousValue, currentValue) => previousValue +
+    currentValue,
+    0
+  );
   return (
     <div>
       <ul>
@@ -12,7 +18,7 @@ function Content({ parts }) {
           <Part key={part.id} part={part} />
         ))}
       </ul>
-      <p>{total}</p>
+      <p><b>total of {total} exercises</b></p>
     </div>
   );
 }
